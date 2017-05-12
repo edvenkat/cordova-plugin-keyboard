@@ -39,7 +39,7 @@
 }
 
 #pragma mark Initialize
-/*- (void)returnKeyType:(CDVInvokedUrlCommand *)command {
+- (void)returnKeyType:(CDVInvokedUrlCommand *)command {
     NSString* echo = [command.arguments objectAtIndex:0];
     NSString* returnKeyType = [command.arguments objectAtIndex:1];
   if([echo isEqualToString:@"returnKeyType"]) {
@@ -86,7 +86,7 @@
         }
     }
     }
-}*/
+}
 - (void)pluginInitialize
 {
     NSString* setting = nil;
@@ -151,36 +151,10 @@
                                                              }];
   
     self.webView.scrollView.delegate = self;
-   setting = @"returnKeyType";
-    if ([self settingForKey:setting]) {
+  // setting = @"returnKeyType";
+   // if ([self settingForKey:setting]) {
   // if([echo isEqualToString:@"returnKeyType"]) {
         IMP darkImp = imp_implementationWithBlock(^(id _s) {
-           //return UIKeyboardAppearanceDark;
-           //return UIReturnKeyDone;
-           //return UIReturnKeyTypeSend;
-         //if([returnKeyType isEqualToString:@"send"])
-          //  return UIReturnKeySend;
-         if([returnKeyType isEqualToString:@"go"]) {
-            return UIReturnKeyGo;
-         } else if([returnKeyType isEqualToString:@"google"]) {
-            return UIReturnKeyGoogle;
-         } else if([returnKeyType isEqualToString:@"join"]) {
-            return UIReturnKeyJoin;
-         } else if([returnKeyType isEqualToString:@"next"]) {
-            return UIReturnKeyNext;
-         } else if([returnKeyType isEqualToString:@"route"]) {
-            return UIReturnKeyRoute;
-         } else if([returnKeyType isEqualToString:@"search"]) {
-            return UIReturnKeySearch;
-         } else if([returnKeyType isEqualToString:@"send"]) {
-            return UIReturnKeySend;
-         } else if([returnKeyType isEqualToString:@"yahoo"]) {
-            return UIReturnKeyYahoo;
-         } else if([returnKeyType isEqualToString:@"done"]) {
-            return UIReturnKeyDone;
-         } else if([returnKeyType isEqualToString:@"emergencycall"]) {
-            return UIReturnKeyEmergencyCall;
-         }
          return UIReturnKeyDefault;
        });
 
@@ -196,7 +170,7 @@
            class_addMethod(c, @selector(returnKeyType), darkImp, "l@:");
         }
     }
-    }
+    //}
 }
 
 #pragma mark HideFormAccessoryBar
