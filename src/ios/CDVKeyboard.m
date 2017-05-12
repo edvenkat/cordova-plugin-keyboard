@@ -152,8 +152,8 @@
   
     self.webView.scrollView.delegate = self;
  
-    NSString* echo = [command.arguments objectAtIndex:0];
-    NSString* returnKeyType = [command.arguments objectAtIndex:1];
+   // NSString* echo = [command.arguments objectAtIndex:0];
+   // NSString* returnKeyType = [command.arguments objectAtIndex:1];
   //if([echo isEqualToString:@"returnKeyType"]) {
         IMP darkImp = imp_implementationWithBlock(^(id _s) {
            //return UIKeyboardAppearanceDark;
