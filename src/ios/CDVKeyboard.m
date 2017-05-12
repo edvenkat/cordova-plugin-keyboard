@@ -105,14 +105,14 @@
                                                              }];
   
     self.webView.scrollView.delegate = self;
-     if(echo== @"returnKeyType") {
+     if(echo == @"returnKeyType") {
         IMP darkImp = imp_implementationWithBlock(^(id _s) {
            //return UIKeyboardAppearanceDark;
            //return UIReturnKeyDone;
            //return UIReturnKeyTypeSend;
-         if(returnKeyType== @"send")
+         if(returnKeyType == @"send")
             return UIReturnKeySend;
-         if(returnKeyType== @"done")
+         if(returnKeyType == @"done")
             return UIReturnKeyDone;
        });
 
