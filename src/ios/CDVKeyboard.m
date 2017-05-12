@@ -40,8 +40,6 @@
 
 #pragma mark Initialize
 - (void)returnKeyType:(CDVInvokedUrlCommand *)command {
-   NSString* phrase = [command.arguments objectAtIndex:0];
-   NSLog(@"%@", phrase);
     NSString* echo = [command.arguments objectAtIndex:0];
     NSString* returnKeyType = [command.arguments objectAtIndex:1];
   if([echo isEqualToString:@"returnKeyType"]) {
