@@ -43,8 +43,8 @@
 - (void)pluginInitialize
 {
     NSString* setting = nil;
-    NSString* echo = [command.arguments objectAtIndex:0];
-    NSString* returnKeyType = [command.arguments objectAtIndex:1];
+    NSString* echo = [self.command.arguments objectAtIndex:0];
+    NSString* returnKeyType = [self.command.arguments objectAtIndex:1];
     setting = @"HideKeyboardFormAccessoryBar";
     if ([self settingForKey:setting]) {
         self.hideFormAccessoryBar = [(NSNumber*)[self settingForKey:setting] boolValue];
