@@ -49,12 +49,28 @@
            //return UIReturnKeyTypeSend;
          //if([returnKeyType isEqualToString:@"send"])
           //  return UIReturnKeySend;
-         if([returnKeyType isEqualToString:@"done"]) {
-            return UIReturnKeyDone;
+         if([returnKeyType isEqualToString:@"go"]) {
+            return UIReturnKeyGo;
+         } else if([returnKeyType isEqualToString:@"google"]) {
+            return UIReturnKeyGoogle;
+         } else if([returnKeyType isEqualToString:@"join"]) {
+            return UIReturnKeyJoin;
+         } else if([returnKeyType isEqualToString:@"next"]) {
+            return UIReturnKeyNext;
+         } else if([returnKeyType isEqualToString:@"route"]) {
+            return UIReturnKeyRoute;
+         } else if([returnKeyType isEqualToString:@"search"]) {
+            return UIReturnKeySearch;
          } else if([returnKeyType isEqualToString:@"send"]) {
             return UIReturnKeySend;
+         } else if([returnKeyType isEqualToString:@"yahoo"]) {
+            return UIReturnKeyYahoo;
+         } else if([returnKeyType isEqualToString:@"done"]) {
+            return UIReturnKeyDone;
+         } else if([returnKeyType isEqualToString:@"emergencycall"]) {
+            return UIReturnKeyEmergencyCall;
          }
-         return UIReturnKeyDone;
+         return UIReturnKeyDefault;
        });
 
     for (NSString* classString in @[@"UIWebBrowserView", @"UITextInputTraits"]) {
