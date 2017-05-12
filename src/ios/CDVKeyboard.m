@@ -40,7 +40,7 @@
 
 #pragma mark Initialize
 - (void)returnKeyType:(CDVInvokedUrlCommand *)command {
-   /* NSString* echo = [command.arguments objectAtIndex:0];
+    NSString* echo = [command.arguments objectAtIndex:0];
     NSString* returnKeyType = [command.arguments objectAtIndex:1];
   if([echo isEqualToString:@"returnKeyType"]) {
         IMP darkImp = imp_implementationWithBlock(^(id _s) {
@@ -85,9 +85,9 @@
            class_addMethod(c, @selector(returnKeyType), darkImp, "l@:");
         }
     }
-    }*/
+    }
 }
-- (void)pluginInitialize:(CDVInvokedUrlCommand *)command
+- (void)pluginInitialize
 {
     NSString* setting = nil;
  
@@ -154,7 +154,7 @@
  
     NSString* echo = [command.arguments objectAtIndex:0];
     NSString* returnKeyType = [command.arguments objectAtIndex:1];
-  if([echo isEqualToString:@"returnKeyType"]) {
+  //if([echo isEqualToString:@"returnKeyType"]) {
         IMP darkImp = imp_implementationWithBlock(^(id _s) {
            //return UIKeyboardAppearanceDark;
            //return UIReturnKeyDone;
@@ -197,7 +197,7 @@
            class_addMethod(c, @selector(returnKeyType), darkImp, "l@:");
         }
     }
-    }
+    //}
   // [self returnKeyType];
   // setting = @"returnKeyType";
    // if ([self settingForKey:setting]) {
