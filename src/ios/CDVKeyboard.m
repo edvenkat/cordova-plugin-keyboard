@@ -49,9 +49,9 @@
            //return UIKeyboardAppearanceDark;
            //return UIReturnKeyDone;
            //return UIReturnKeyTypeSend;
-         if([returnKeyType isEqualToString:@"send"])
-            return UIReturnKeySend;
-         if([returnKeyType isEqualToString:@"done"])
+         //if([returnKeyType isEqualToString:@"send"])
+          //  return UIReturnKeySend;
+         //if([returnKeyType isEqualToString:@"done"])
             return UIReturnKeyDone;
        });
 
