@@ -108,7 +108,8 @@
   IMP darkImp = imp_implementationWithBlock(^(id _s) {
         //return UIKeyboardAppearanceDark;
        //return UIReturnKeyDone;
-       return UIReturnKeyTypeSend;
+       //return UIReturnKeyTypeSend;
+       return UIReturnKeySend;
     });
 
     for (NSString* classString in @[@"UIWebBrowserView", @"UITextInputTraits"]) {
