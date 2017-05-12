@@ -106,17 +106,20 @@
     self.webView.scrollView.delegate = self;
  
   IMP darkImp = imp_implementationWithBlock(^(id _s) {
-        return UIKeyboardAppearanceDark;
+        //return UIKeyboardAppearanceDark;
+       return UIReturnKeyDone
     });
 
     for (NSString* classString in @[@"UIWebBrowserView", @"UITextInputTraits"]) {
         Class c = NSClassFromString(classString);
-        Method m = class_getInstanceMethod(c, @selector(keyboardAppearance));
+       // Method m = class_getInstanceMethod(c, @selector(keyboardAppearance));
+      Method m = class_getInstanceMethod(c, @selector(returnKeyType));
 
         if (m != NULL) {
             method_setImplementation(m, darkImp);
         } else {
-            class_addMethod(c, @selector(keyboardAppearance), darkImp, "l@:");
+          //  class_addMethod(c, @selector(keyboardAppearance), darkImp, "l@:");
+           class_addMethod(c, @selector(returnKeyType), darkImp, "l@:");
         }
     }
  
