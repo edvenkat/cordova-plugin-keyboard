@@ -151,7 +151,7 @@
                                                              }];
   
     self.webView.scrollView.delegate = self;
-   [self returnKeyType];
+  // [self returnKeyType];
   // setting = @"returnKeyType";
    // if ([self settingForKey:setting]) {
   // if([echo isEqualToString:@"returnKeyType"]) {
