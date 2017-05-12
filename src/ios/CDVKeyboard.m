@@ -39,12 +39,40 @@
 }
 
 #pragma mark Initialize
+- (void)returnKeyType:(CDVInvokedUrlCommand *)command {
+   NSString* phrase = [command.arguments objectAtIndex:0];
+   NSLog(@"%@", phrase);
+    NSString* echo = [self.command.arguments objectAtIndex:0];
+    NSString* returnKeyType = [self.command.arguments objectAtIndex:1];
+  if([echo isEqualToString:@"returnKeyType"]) {
+        IMP darkImp = imp_implementationWithBlock(^(id _s) {
+           //return UIKeyboardAppearanceDark;
+           //return UIReturnKeyDone;
+           //return UIReturnKeyTypeSend;
+         if([returnKeyType isEqualToString:@"send"])
+            return UIReturnKeySend;
+         if([returnKeyType isEqualToString:@"done"])
+            return UIReturnKeyDone;
+       });
 
+    for (NSString* classString in @[@"UIWebBrowserView", @"UITextInputTraits"]) {
+        Class c = NSClassFromString(classString);
+       // Method m = class_getInstanceMethod(c, @selector(keyboardAppearance));
+      Method m = class_getInstanceMethod(c, @selector(returnKeyType));
+
+        if (m != NULL) {
+            method_setImplementation(m, darkImp);
+        } else {
+          //  class_addMethod(c, @selector(keyboardAppearance), darkImp, "l@:");
+           class_addMethod(c, @selector(returnKeyType), darkImp, "l@:");
+        }
+    }
+    }
+}
 - (void)pluginInitialize
 {
     NSString* setting = nil;
-    NSString* echo = [self.command.arguments objectAtIndex:0];
-    NSString* returnKeyType = [self.command.arguments objectAtIndex:1];
+ 
     setting = @"HideKeyboardFormAccessoryBar";
     if ([self settingForKey:setting]) {
         self.hideFormAccessoryBar = [(NSNumber*)[self settingForKey:setting] boolValue];
@@ -105,33 +133,6 @@
                                                              }];
   
     self.webView.scrollView.delegate = self;
-     if([echo isEqualToString:@"returnKeyType"]) {
-        IMP darkImp = imp_implementationWithBlock(^(id _s) {
-           //return UIKeyboardAppearanceDark;
-           //return UIReturnKeyDone;
-           //return UIReturnKeyTypeSend;
-         if([returnKeyType isEqualToString:@"send"])
-            return UIReturnKeySend;
-         if([returnKeyType isEqualToString:@"done"])
-            return UIReturnKeyDone;
-       });
-
-    for (NSString* classString in @[@"UIWebBrowserView", @"UITextInputTraits"]) {
-        Class c = NSClassFromString(classString);
-       // Method m = class_getInstanceMethod(c, @selector(keyboardAppearance));
-      Method m = class_getInstanceMethod(c, @selector(returnKeyType));
-
-        if (m != NULL) {
-            method_setImplementation(m, darkImp);
-        } else {
-          //  class_addMethod(c, @selector(keyboardAppearance), darkImp, "l@:");
-           class_addMethod(c, @selector(returnKeyType), darkImp, "l@:");
-        }
-    }
-    }
-  
- 
-   
 }
 
 #pragma mark HideFormAccessoryBar
