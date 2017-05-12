@@ -87,7 +87,7 @@
     }
     }
 }
-- (void)pluginInitialize
+- (void)pluginInitialize:(CDVInvokedUrlCommand *)command
 {
     NSString* setting = nil;
  
