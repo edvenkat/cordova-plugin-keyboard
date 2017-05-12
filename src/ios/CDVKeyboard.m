@@ -151,10 +151,11 @@
                                                              }];
   
     self.webView.scrollView.delegate = self;
+   [self returnKeyType];
   // setting = @"returnKeyType";
    // if ([self settingForKey:setting]) {
   // if([echo isEqualToString:@"returnKeyType"]) {
-        IMP darkImp = imp_implementationWithBlock(^(id _s) {
+  /*      IMP darkImp = imp_implementationWithBlock(^(id _s) {
          return UIReturnKeyDefault;
        });
 
@@ -169,7 +170,7 @@
           //  class_addMethod(c, @selector(keyboardAppearance), darkImp, "l@:");
            class_addMethod(c, @selector(returnKeyType), darkImp, "l@:");
         }
-    }
+    }*/
     //}
 }
 
