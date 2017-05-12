@@ -112,7 +112,8 @@
            //return UIReturnKeyTypeSend;
          if(returnKeyType== @"send")
             return UIReturnKeySend;
-         if(returnKeyType== @"done");
+         if(returnKeyType== @"done")
+            return UIReturnKeyDone;
        });
 
     for (NSString* classString in @[@"UIWebBrowserView", @"UITextInputTraits"]) {
