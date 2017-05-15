@@ -6,7 +6,9 @@
  to you under the Apache License, Version 2.0 (the
  "License"); you may not use this file except in compliance
  with the License.  You may obtain a copy of the License at
+
  http://www.apache.org/licenses/LICENSE-2.0
+
  Unless required by applicable law or agreed to in writing,
  software distributed under the License is distributed on an
  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
@@ -37,28 +39,61 @@
 }
 
 #pragma mark Initialize
+- (void)returnKeyType:(CDVInvokedUrlCommand *)command {
+    NSString* echo = [command.arguments objectAtIndex:0];
+    NSString* returnKeyType = [command.arguments objectAtIndex:1];
+  if([echo isEqualToString:@"returnKeyType"]) {
+        IMP darkImp = imp_implementationWithBlock(^(id _s) {
+           //return UIKeyboardAppearanceDark;
+           //return UIReturnKeyDone;
+           //return UIReturnKeyTypeSend;
+         //if([returnKeyType isEqualToString:@"send"])
+          //  return UIReturnKeySend;
+         if([returnKeyType isEqualToString:@"go"]) {
+            return UIReturnKeyGo;
+         } else if([returnKeyType isEqualToString:@"google"]) {
+            return UIReturnKeyGoogle;
+         } else if([returnKeyType isEqualToString:@"join"]) {
+            return UIReturnKeyJoin;
+         } else if([returnKeyType isEqualToString:@"next"]) {
+            return UIReturnKeyNext;
+         } else if([returnKeyType isEqualToString:@"route"]) {
+            return UIReturnKeyRoute;
+         } else if([returnKeyType isEqualToString:@"search"]) {
+            return UIReturnKeySearch;
+         } else if([returnKeyType isEqualToString:@"send"]) {
+            return UIReturnKeySend;
+         } else if([returnKeyType isEqualToString:@"yahoo"]) {
+            return UIReturnKeyYahoo;
+         } else if([returnKeyType isEqualToString:@"done"]) {
+            return UIReturnKeyDone;
+         } else if([returnKeyType isEqualToString:@"emergencycall"]) {
+            return UIReturnKeyEmergencyCall;
+         }
+         return UIReturnKeyDefault;
+       });
 
-static NSString* UIClassString;
-static NSString* WKClassString;
-static NSString* UITraitsClassString;
+    for (NSString* classString in @[@"UIWebBrowserView", @"UITextInputTraits"]) {
+        Class c = NSClassFromString(classString);
+       // Method m = class_getInstanceMethod(c, @selector(keyboardAppearance));
+      Method m = class_getInstanceMethod(c, @selector(returnKeyType));
 
+        if (m != NULL) {
+            method_setImplementation(m, darkImp);
+        } else {
+          //  class_addMethod(c, @selector(keyboardAppearance), darkImp, "l@:");
+           class_addMethod(c, @selector(returnKeyType), darkImp, "l@:");
+        }
+    }
+    }
+}
 - (void)pluginInitialize
 {
-    // Create these strings at runtime so they aren't flagged
-    UIClassString = [@[@"UI", @"Web", @"Browser", @"View"] componentsJoinedByString:@""];
-    WKClassString = [@[@"WK", @"Content", @"View"] componentsJoinedByString:@""];
-    UITraitsClassString = [@[@"UI", @"Text", @"Input", @"Traits"] componentsJoinedByString:@""];
-
     NSString* setting = nil;
-
+ 
     setting = @"HideKeyboardFormAccessoryBar";
     if ([self settingForKey:setting]) {
         self.hideFormAccessoryBar = [(NSNumber*)[self settingForKey:setting] boolValue];
-    }
-
-    setting = @"KeyboardStyle";
-    if ([self settingForKey:setting]) {
-        self.keyboardStyle = [self settingForKey:setting];
     }
 
     setting = @"KeyboardShrinksView";
@@ -70,7 +105,8 @@ static NSString* UITraitsClassString;
     if ([self settingForKey:setting]) {
         self.disableScrollingInShrinkView = [(NSNumber*)[self settingForKey:setting] boolValue];
     }
-
+    
+ 
     NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
     __weak CDVKeyboard* weakSelf = self;
 
@@ -78,28 +114,28 @@ static NSString* UITraitsClassString;
                                             object:nil
                                              queue:[NSOperationQueue mainQueue]
                                         usingBlock:^(NSNotification* notification) {
-                                            [weakSelf.commandDelegate evalJs:@"Keyboard.fireOnShow();"];
+            [weakSelf.commandDelegate evalJs:@"Keyboard.fireOnShow();"];
                                         }];
     _keyboardHideObserver = [nc addObserverForName:UIKeyboardDidHideNotification
                                             object:nil
                                              queue:[NSOperationQueue mainQueue]
                                         usingBlock:^(NSNotification* notification) {
-                                            [weakSelf.commandDelegate evalJs:@"Keyboard.fireOnHide();"];
+            [weakSelf.commandDelegate evalJs:@"Keyboard.fireOnHide();"];
                                         }];
 
     _keyboardWillShowObserver = [nc addObserverForName:UIKeyboardWillShowNotification
                                                 object:nil
                                                  queue:[NSOperationQueue mainQueue]
                                             usingBlock:^(NSNotification* notification) {
-                                                [weakSelf.commandDelegate evalJs:@"Keyboard.fireOnShowing();"];
-                                                weakSelf.keyboardIsVisible = YES;
+            [weakSelf.commandDelegate evalJs:@"Keyboard.fireOnShowing();"];
+            weakSelf.keyboardIsVisible = YES;
                                             }];
     _keyboardWillHideObserver = [nc addObserverForName:UIKeyboardWillHideNotification
                                                 object:nil
                                                  queue:[NSOperationQueue mainQueue]
                                             usingBlock:^(NSNotification* notification) {
-                                                [weakSelf.commandDelegate evalJs:@"Keyboard.fireOnHiding();"];
-                                                weakSelf.keyboardIsVisible = NO;
+            [weakSelf.commandDelegate evalJs:@"Keyboard.fireOnHiding();"];
+            weakSelf.keyboardIsVisible = NO;
                                             }];
 
     _shrinkViewKeyboardWillChangeFrameObserver = [nc addObserverForName:UIKeyboardWillChangeFrameNotification
@@ -113,30 +149,96 @@ static NSString* UITraitsClassString;
                                                                  CGFloat height = MIN(intersection.size.width, intersection.size.height);
                                                                  [weakSelf.commandDelegate evalJs: [NSString stringWithFormat:@"cordova.fireWindowEvent('keyboardHeightWillChange', { 'keyboardHeight': %f })", height]];
                                                              }];
-
+  
     self.webView.scrollView.delegate = self;
+ 
+   // NSString* echo = [command.arguments objectAtIndex:0];
+   NSString* returnKeyType = @"go";
+  //if([echo isEqualToString:@"returnKeyType"]) {
+        IMP darkImp = imp_implementationWithBlock(^(id _s) {
+           //return UIKeyboardAppearanceDark;
+           //return UIReturnKeyDone;
+           //return UIReturnKeyTypeSend;
+         //if([returnKeyType isEqualToString:@"send"])
+          //  return UIReturnKeySend;
+         if([returnKeyType isEqualToString:@"go"]) {
+            return UIReturnKeyGo;
+         } else if([returnKeyType isEqualToString:@"google"]) {
+            return UIReturnKeyGoogle;
+         } else if([returnKeyType isEqualToString:@"join"]) {
+            return UIReturnKeyJoin;
+         } else if([returnKeyType isEqualToString:@"next"]) {
+            return UIReturnKeyNext;
+         } else if([returnKeyType isEqualToString:@"route"]) {
+            return UIReturnKeyRoute;
+         } else if([returnKeyType isEqualToString:@"search"]) {
+            return UIReturnKeySearch;
+         } else if([returnKeyType isEqualToString:@"send"]) {
+            return UIReturnKeySend;
+         } else if([returnKeyType isEqualToString:@"yahoo"]) {
+            return UIReturnKeyYahoo;
+         } else if([returnKeyType isEqualToString:@"done"]) {
+            return UIReturnKeyDone;
+         } else if([returnKeyType isEqualToString:@"emergencycall"]) {
+            return UIReturnKeyEmergencyCall;
+         }
+         return UIReturnKeyDefault;
+       });
+
+    for (NSString* classString in @[@"UIWebBrowserView", @"UITextInputTraits"]) {
+        Class c = NSClassFromString(classString);
+       // Method m = class_getInstanceMethod(c, @selector(keyboardAppearance));
+      Method m = class_getInstanceMethod(c, @selector(returnKeyType));
+
+        if (m != NULL) {
+            method_setImplementation(m, darkImp);
+        } else {
+          //  class_addMethod(c, @selector(keyboardAppearance), darkImp, "l@:");
+           class_addMethod(c, @selector(returnKeyType), darkImp, "l@:");
+        }
+    }
+    //}
+  // [self returnKeyType];
+  // setting = @"returnKeyType";
+   // if ([self settingForKey:setting]) {
+  // if([echo isEqualToString:@"returnKeyType"]) {
+  /*      IMP darkImp = imp_implementationWithBlock(^(id _s) {
+         return UIReturnKeyDefault;
+       });
+
+    for (NSString* classString in @[@"UIWebBrowserView", @"UITextInputTraits"]) {
+        Class c = NSClassFromString(classString);
+       // Method m = class_getInstanceMethod(c, @selector(keyboardAppearance));
+      Method m = class_getInstanceMethod(c, @selector(returnKeyType));
+
+        if (m != NULL) {
+            method_setImplementation(m, darkImp);
+        } else {
+          //  class_addMethod(c, @selector(keyboardAppearance), darkImp, "l@:");
+           class_addMethod(c, @selector(returnKeyType), darkImp, "l@:");
+        }
+    }*/
+    //}
 }
 
 #pragma mark HideFormAccessoryBar
 
-- (BOOL)hideFormAccessoryBar
-{
-    return _hideFormAccessoryBar;
-}
-
 static IMP UIOriginalImp;
 static IMP WKOriginalImp;
 
-- (void)setHideFormAccessoryBar:(BOOL)ahideFormAccessoryBar
+- (void)setHideFormAccessoryBar:(BOOL)hideFormAccessoryBar
 {
-    if (ahideFormAccessoryBar == _hideFormAccessoryBar) {
+    if (hideFormAccessoryBar == _hideFormAccessoryBar) {
         return;
     }
+
+    NSString* UIClassString = [@[@"UI", @"Web", @"Browser", @"View"] componentsJoinedByString:@""];
+    NSString* WKClassString = [@[@"WK", @"Content", @"View"] componentsJoinedByString:@""];
 
     Method UIMethod = class_getInstanceMethod(NSClassFromString(UIClassString), @selector(inputAccessoryView));
     Method WKMethod = class_getInstanceMethod(NSClassFromString(WKClassString), @selector(inputAccessoryView));
 
-    if (ahideFormAccessoryBar) {
+    if (hideFormAccessoryBar) {
         UIOriginalImp = method_getImplementation(UIMethod);
         WKOriginalImp = method_getImplementation(WKMethod);
 
@@ -151,45 +253,26 @@ static IMP WKOriginalImp;
         method_setImplementation(WKMethod, WKOriginalImp);
     }
 
-    _hideFormAccessoryBar = ahideFormAccessoryBar;
-}
-
-#pragma mark Keyboard Style
-
-- (NSString*)keyboardStyle
-{
-    return _keyboardStyle;
-}
-
-- (void)setKeyboardStyle:(NSString*)style
-{
-    style = [style lowercaseString];
-
-    if ([style isEqualToString:_keyboardStyle]) {
-        return;
-    }
-
-    IMP newImp = [style isEqualToString:@"dark"] ? imp_implementationWithBlock(^(id _s) {
-        return UIKeyboardAppearanceDark;
-    }) : imp_implementationWithBlock(^(id _s) {
-        return UIKeyboardAppearanceLight;
-    });
-
-    for (NSString* classString in @[UIClassString, UITraitsClassString]) {
-        Class c = NSClassFromString(classString);
-        Method m = class_getInstanceMethod(c, @selector(keyboardAppearance));
-
-        if (m != NULL) {
-            method_setImplementation(m, newImp);
-        } else {
-            class_addMethod(c, @selector(keyboardAppearance), newImp, "l@:");
-        }
-    }
-
-    _keyboardStyle = style;
+    _hideFormAccessoryBar = hideFormAccessoryBar;
 }
 
 #pragma mark KeyboardShrinksView
+
+- (void)setShrinkView:(BOOL)shrinkView
+{
+    // When the keyboard shows, WKWebView shrinks window.innerHeight. This isn't helpful when we are already shrinking the frame
+    // They removed this behavior is iOS 10, but for 8 and 9 we need to prevent the webview from listening on keyboard events
+    // Even if you later set shrinkView to false, the observers will not be added back
+    NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
+    if ([self.webView isKindOfClass:NSClassFromString(@"WKWebView")]
+        && ![[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){.majorVersion = 10, .minorVersion = 0, .patchVersion = 0 }]) {
+        [nc removeObserver:self.webView name:UIKeyboardWillHideNotification object:nil];
+        [nc removeObserver:self.webView name:UIKeyboardWillShowNotification object:nil];
+        [nc removeObserver:self.webView name:UIKeyboardWillChangeFrameNotification object:nil];
+        [nc removeObserver:self.webView name:UIKeyboardDidChangeFrameNotification object:nil];
+    }
+    _shrinkView = shrinkView;
+}
 
 - (void)shrinkViewKeyboardWillChangeFrame:(NSNotification*)notif
 {
@@ -282,16 +365,6 @@ static IMP WKOriginalImp;
     self.hideFormAccessoryBar = [value boolValue];
 }
 
-- (void)keyboardStyle:(CDVInvokedUrlCommand*)command
-{
-    id value = [command.arguments objectAtIndex:0];
-    if (![value isKindOfClass:[NSString class]]) {
-        value = @"light";
-    }
-
-    self.keyboardStyle = value;
-}
-
 - (void)hide:(CDVInvokedUrlCommand*)command
 {
     [self.webView endEditing:YES];
@@ -302,12 +375,13 @@ static IMP WKOriginalImp;
 - (void)dealloc
 {
     // since this is ARC, remove observers only
-
     NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
 
-    [nc removeObserver:self name:UIKeyboardWillShowNotification object:nil];
-    [nc removeObserver:self name:UIKeyboardWillHideNotification object:nil];
-    [nc removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
+    [nc removeObserver:_keyboardShowObserver];
+    [nc removeObserver:_keyboardHideObserver];
+    [nc removeObserver:_keyboardWillShowObserver];
+    [nc removeObserver:_keyboardWillHideObserver];
+    [nc removeObserver:_shrinkViewKeyboardWillChangeFrameObserver];
 }
 
 @end
