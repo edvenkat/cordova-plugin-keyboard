@@ -6,9 +6,7 @@
  to you under the Apache License, Version 2.0 (the
  "License"); you may not use this file except in compliance
  with the License.  You may obtain a copy of the License at
-
  http://www.apache.org/licenses/LICENSE-2.0
-
  Unless required by applicable law or agreed to in writing,
  software distributed under the License is distributed on an
  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
@@ -21,20 +19,27 @@
 
 @interface CDVKeyboard : CDVPlugin {
     @protected
+    BOOL _shrinkView;
+    @protected
+    BOOL _hideFormAccessoryBar;
+    @protected
+    NSString* _keyboardStyle;
+    @protected
     id _keyboardShowObserver, _keyboardHideObserver, _keyboardWillShowObserver, _keyboardWillHideObserver;
     @protected
     id _shrinkViewKeyboardWillChangeFrameObserver;
 }
 
-@property (readwrite, assign, nonatomic) BOOL shrinkView;
-@property (readwrite, assign, nonatomic) BOOL disableScrollingInShrinkView;
-@property (readwrite, assign, nonatomic) BOOL hideFormAccessoryBar;
+@property (readwrite, assign) BOOL shrinkView;
+@property (readwrite, assign) BOOL disableScrollingInShrinkView;
+@property (readwrite, assign) BOOL hideFormAccessoryBar;
 @property (readwrite, assign) NSString* keyboardStyle;
-@property (readonly, assign, nonatomic) BOOL keyboardIsVisible;
+@property (readonly, assign) BOOL keyboardIsVisible;
 
 - (void)shrinkView:(CDVInvokedUrlCommand*)command;
 - (void)disableScrollingInShrinkView:(CDVInvokedUrlCommand*)command;
 - (void)hideFormAccessoryBar:(CDVInvokedUrlCommand*)command;
+- (void)keyboardStyle:(CDVInvokedUrlCommand*)command;
 - (void)hide:(CDVInvokedUrlCommand*)command;
 
 @end
