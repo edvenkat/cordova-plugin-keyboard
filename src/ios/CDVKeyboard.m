@@ -170,19 +170,19 @@ static IMP WKOriginalImp;
     }
 
     IMP newImp = [style isEqualToString:@"dark"] ? imp_implementationWithBlock(^(id _s) {
-        return UIReturnKeyGo;
+        return UIKeyboardAppearanceDark;
     }) : imp_implementationWithBlock(^(id _s) {
-        return UIReturnKeyNext;
+        return UIKeyboardAppearanceLight;
     });
 
     for (NSString* classString in @[UIClassString, UITraitsClassString]) {
         Class c = NSClassFromString(classString);
-        Method m = class_getInstanceMethod(c, @selector(returnKeyType));
+        Method m = class_getInstanceMethod(c, @selector(keyboardAppearance));
 
         if (m != NULL) {
             method_setImplementation(m, newImp);
         } else {
-            class_addMethod(c, @selector(returnKeyType), newImp, "l@:");
+            class_addMethod(c, @selector(keyboardAppearance), newImp, "l@:");
         }
     }
 
