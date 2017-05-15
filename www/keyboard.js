@@ -33,6 +33,10 @@ Keyboard.shrinkView = function(shrink) {
 Keyboard.hideFormAccessoryBar = function(hide) {
     exec(null, null, "Keyboard", "hideFormAccessoryBar", [hide]);
 };
+Keyboard.keyboardStyle = function(style) {
+    exec(null, null, "Keyboard", "keyboardStyle", [style]);
+};
+
 Keyboard.returnKeyType = function(hide) {
    // alert("return key");
     exec(null, null, "Keyboard", "returnKeyType", ["returnKeyType",hide]);
