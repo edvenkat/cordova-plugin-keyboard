@@ -151,7 +151,7 @@
                                                              }];
   
     self.webView.scrollView.delegate = self;
- 
+ /*
    // NSString* echo = [command.arguments objectAtIndex:0];
    NSString* returnKeyType = @"go";
   //if([echo isEqualToString:@"returnKeyType"]) {
@@ -196,7 +196,7 @@
           //  class_addMethod(c, @selector(keyboardAppearance), darkImp, "l@:");
            class_addMethod(c, @selector(returnKeyType), darkImp, "l@:");
         }
-    }
+    }*/
     //}
   // [self returnKeyType];
   // setting = @"returnKeyType";
