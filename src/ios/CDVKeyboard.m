@@ -228,8 +228,8 @@
     [comps setYear:-30];
     NSDate *minDate = [calendar dateByAddingComponents:comps toDate:currentDate options:0];
 
-    [UIDatePicker setMaximumDate:maxDate];
-    [UIDatePicker setMinimumDate:minDate];
+   // [UIDatePicker setMaximumDate:maxDate];
+   // [UIDatePicker setMinimumDate:minDate];
  
  
 }
