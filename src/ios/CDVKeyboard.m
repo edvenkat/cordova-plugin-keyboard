@@ -240,7 +240,7 @@
 [dateDelta setMinute:30];
 NSDate *maximumDate = [calendar dateByAddingComponents:dateDelta toDate:currentDate options:0];*/
 //[self.datePicker setMaximumDate:maximumDate];
- 
+/* 
   NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDate *currentDate = [NSDate date];
     NSDateComponents *comps = [[NSDateComponents alloc] init];
@@ -266,7 +266,7 @@ NSDate *maximumDate = [calendar dateByAddingComponents:dateDelta toDate:currentD
            class_addMethod(c, @selector(maximumDate), darkImp, "l@:");
         }
     }
- 
+ */
    // [UIDatePicker setMaximumDate:maxDate];
    // [UIDatePicker setMinimumDate:minDate];
  
