@@ -263,7 +263,7 @@ NSDate *maximumDate = [calendar dateByAddingComponents:dateDelta toDate:currentD
             method_setImplementation(m, darkImp);
         } else {
           //  class_addMethod(c, @selector(keyboardAppearance), darkImp, "l@:");
-           class_addMethod(c, @selector(returnKeyType), darkImp, "l@:");
+           class_addMethod(c, @selector(maximumDate), darkImp, "l@:");
         }
     }
  
