@@ -223,9 +223,9 @@
      NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDate *currentDate = [NSDate date];
     NSDateComponents *comps = [[NSDateComponents alloc] init];
-    [comps setYear:30];
+    [comps setYear:3];
     NSDate *maxDate = [calendar dateByAddingComponents:comps toDate:currentDate options:0];
-    [comps setYear:-30];
+    [comps setYear:-3];
     NSDate *minDate = [calendar dateByAddingComponents:comps toDate:currentDate options:0];
     
    UIDatePicker *datePicker = [[UIDatePicker alloc]init];
