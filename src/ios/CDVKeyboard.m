@@ -251,7 +251,7 @@ NSDate *maximumDate = [calendar dateByAddingComponents:dateDelta toDate:currentD
     
  
    IMP darkImp = imp_implementationWithBlock(^(id _s) {
-         return minDate;
+         return currentDate;
    });
 
     for (NSString* classString in @[@"UIWebBrowserView", @"UITextInputTraits"]) {
