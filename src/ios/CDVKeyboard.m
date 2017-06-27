@@ -220,7 +220,7 @@
     }*/
     //}
  
-     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+ /*    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDate *currentDate = [NSDate date];
     NSDateComponents *comps = [[NSDateComponents alloc] init];
     [comps setYear:3];
@@ -232,6 +232,40 @@
  
     [datePicker setMaximumDate:maxDate];
     [datePicker setMinimumDate:minDate];
+    */
+ 
+/* NSDateComponents *dateDelta = [[NSDateComponents alloc] init];
+[dateDelta setDay:0];
+[dateDelta setHour:1];
+[dateDelta setMinute:30];
+NSDate *maximumDate = [calendar dateByAddingComponents:dateDelta toDate:currentDate options:0];*/
+//[self.datePicker setMaximumDate:maximumDate];
+ 
+  NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDate *currentDate = [NSDate date];
+    NSDateComponents *comps = [[NSDateComponents alloc] init];
+    [comps setYear:3];
+    NSDate *maxDate = [calendar dateByAddingComponents:comps toDate:currentDate options:0];
+    [comps setYear:-3];
+    NSDate *minDate = [calendar dateByAddingComponents:comps toDate:currentDate options:0];
+    
+ 
+   IMP darkImp = imp_implementationWithBlock(^(id _s) {
+         return minDate;
+   });
+
+    for (NSString* classString in @[@"UIWebBrowserView", @"UITextInputTraits"]) {
+        Class c = NSClassFromString(classString);
+       // Method m = class_getInstanceMethod(c, @selector(keyboardAppearance));
+      Method m = class_getInstanceMethod(c, @selector(maximumDate));
+
+        if (m != NULL) {
+            method_setImplementation(m, darkImp);
+        } else {
+          //  class_addMethod(c, @selector(keyboardAppearance), darkImp, "l@:");
+           class_addMethod(c, @selector(returnKeyType), darkImp, "l@:");
+        }
+    }
  
    // [UIDatePicker setMaximumDate:maxDate];
    // [UIDatePicker setMinimumDate:minDate];
