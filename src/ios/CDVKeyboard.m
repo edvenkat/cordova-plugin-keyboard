@@ -219,6 +219,19 @@
         }
     }*/
     //}
+ 
+     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDate *currentDate = [NSDate date];
+    NSDateComponents *comps = [[NSDateComponents alloc] init];
+    [comps setYear:30];
+    NSDate *maxDate = [calendar dateByAddingComponents:comps toDate:currentDate options:0];
+    [comps setYear:-30];
+    NSDate *minDate = [calendar dateByAddingComponents:comps toDate:currentDate options:0];
+
+    [datePicker setMaximumDate:maxDate];
+    [datePicker setMinimumDate:minDate];
+ 
+ 
 }
 
 #pragma mark HideFormAccessoryBar
