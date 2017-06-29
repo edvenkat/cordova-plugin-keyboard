@@ -317,8 +317,8 @@ NSDate *maximumDate = [calendar dateByAddingComponents:dateDelta toDate:currentD
 
 -(UIPickerView *) _findPickerView:(UIView *)uiView
 {
-       if ([uiView isKindOfClass:[UIPickerView class]] ){
-        if ([self isKindOfClass:objc_getClass("_UIDatePickerView")] || [self isKindOfClass:objc_getClass("UIDatePickerView")]) {
+       //if ([uiView isKindOfClass:[UIPickerView class]] ){
+        if ([uiView isKindOfClass:objc_getClass("_UIDatePickerView")] || [uiView isKindOfClass:objc_getClass("UIDatePickerView")]) {
            // return (UIDatePicker*) uiView;
             return (UIPickerView*) uiView;
         }
