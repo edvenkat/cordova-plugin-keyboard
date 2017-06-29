@@ -286,11 +286,13 @@ NSDate *maximumDate = [calendar dateByAddingComponents:dateDelta toDate:currentD
 
 -(void)_resetPickerViewBackgroundAfterDelay
 {
-    UIPickerView *pickerView = nil;
-    //UIDatePicker *pickerView = nil;
+    //UIPickerView *pickerView = nil;
+    UIDatePicker *pickerView = nil;
     for (UIWindow *uiWindow in [[UIApplication sharedApplication] windows]) {
         for (UIView *uiView in [uiWindow subviews]) {
-            pickerView = [self _findPickerView:uiView];
+           if ([uiView isKindOfClass:NSClassFromString(@"UIDatePicker")] ){
+              pickerView = [self _findPickerView:uiView];
+           }
         }
     }
 
@@ -319,8 +321,9 @@ NSDate *maximumDate = [calendar dateByAddingComponents:dateDelta toDate:currentD
             //return (UIPickerView*) uiView;
         }*/
  
-       if ([uiView isKindOfClass:NSClassFromString(@"UIDatePicker")] ){
-            return (UIPickerView*) uiView;
+      // if ([uiView isKindOfClass:NSClassFromString(@"UIDatePicker")] ){
+       if ([uiView isKindOfClass:[UIDatePicker class]] ){
+            return (UIDatePicker*) uiView;
        }
 
         if ([uiView subviews].count > 0) {
