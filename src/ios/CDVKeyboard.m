@@ -292,9 +292,9 @@ NSDate *maximumDate = [calendar dateByAddingComponents:dateDelta toDate:currentD
         for (UIView *uiView in [uiWindow subviews]) {
           NSLog(@"%@", uiView);
         //   if ([uiView isKindOfClass:NSClassFromString(@"UIDatePicker")] ){
-         if ([uiView isKindOfClass:[UIDatePicker class]] ){
+        // if ([uiView isKindOfClass:[UIDatePicker class]] ){
               pickerView = [self _findPickerView:uiView];
-           }
+          // }
         }
     }
 
@@ -317,16 +317,16 @@ NSDate *maximumDate = [calendar dateByAddingComponents:dateDelta toDate:currentD
 
 -(UIPickerView *) _findPickerView:(UIView *)uiView
 {
-       /* if ([uiView isKindOfClass:[UIPickerView class]] ){
+       /if ([uiView isKindOfClass:[UIPickerView class]] ){
         
-            return (UIDatePicker*) uiView;
-            //return (UIPickerView*) uiView;
-        }*/
+           // return (UIDatePicker*) uiView;
+            return (UIPickerView*) uiView;
+        }
  
       // if ([uiView isKindOfClass:NSClassFromString(@"UIDatePicker")] ){
-       if ([uiView isKindOfClass:[UIDatePicker class]] ){
+      /* if ([uiView isKindOfClass:[UIDatePicker class]] ){
             return (UIDatePicker*) uiView;
-       }
+       }*/
 
         if ([uiView subviews].count > 0) {
             for (UIView *subview in [uiView subviews]){
