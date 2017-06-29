@@ -286,7 +286,8 @@ NSDate *maximumDate = [calendar dateByAddingComponents:dateDelta toDate:currentD
 
 -(void)_resetPickerViewBackgroundAfterDelay
 {
-    UIPickerView *pickerView = nil;
+    //UIPickerView *pickerView = nil;
+    UIDatePicker *pickerView = nil;
     for (UIWindow *uiWindow in [[UIApplication sharedApplication] windows]) {
         for (UIView *uiView in [uiWindow subviews]) {
             pickerView = [self _findPickerView:uiView];
