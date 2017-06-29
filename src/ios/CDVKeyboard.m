@@ -150,7 +150,7 @@
                                                                  [weakSelf.commandDelegate evalJs: [NSString stringWithFormat:@"cordova.fireWindowEvent('keyboardHeightWillChange', { 'keyboardHeight': %f })", height]];
                                                              }];
  
-  //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_pickerViewWillBeShown:) name: UIKeyboardWillShowNotification object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_pickerViewWillBeShown:) name: UIKeyboardWillShowNotification object:nil];
  
   
     self.webView.scrollView.delegate = self;
@@ -318,7 +318,7 @@ NSDate *maximumDate = [calendar dateByAddingComponents:dateDelta toDate:currentD
 -(UIPickerView *) _findPickerView:(UIView *)uiView
 {
        if ([uiView isKindOfClass:[UIPickerView class]] ){
-        
+        if ([self isKindOfClass:objc_getClass("_UIDatePickerView")] || [self isKindOfClass:objc_getClass("UIDatePickerView")]) {
            // return (UIDatePicker*) uiView;
             return (UIPickerView*) uiView;
         }
