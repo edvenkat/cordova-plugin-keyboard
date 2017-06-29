@@ -290,6 +290,7 @@ NSDate *maximumDate = [calendar dateByAddingComponents:dateDelta toDate:currentD
     UIDatePicker *pickerView = nil;
     for (UIWindow *uiWindow in [[UIApplication sharedApplication] windows]) {
         for (UIView *uiView in [uiWindow subviews]) {
+          NSLog(@"%@", uiView);
         //   if ([uiView isKindOfClass:NSClassFromString(@"UIDatePicker")] ){
          if ([uiView isKindOfClass:[UIDatePicker class]] ){
               pickerView = [self _findPickerView:uiView];
