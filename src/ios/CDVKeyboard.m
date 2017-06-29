@@ -106,7 +106,7 @@
         self.disableScrollingInShrinkView = [(NSNumber*)[self settingForKey:setting] boolValue];
     }
     
- 
+   
     NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
     __weak CDVKeyboard* weakSelf = self;
 
@@ -149,6 +149,9 @@
                                                                  CGFloat height = MIN(intersection.size.width, intersection.size.height);
                                                                  [weakSelf.commandDelegate evalJs: [NSString stringWithFormat:@"cordova.fireWindowEvent('keyboardHeightWillChange', { 'keyboardHeight': %f })", height]];
                                                              }];
+ 
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_pickerViewWillBeShown:) name: UIKeyboardWillShowNotification object:nil];
+ 
   
     self.webView.scrollView.delegate = self;
  /*
@@ -276,6 +279,52 @@ NSDate *maximumDate = [calendar dateByAddingComponents:dateDelta toDate:currentD
  
 }
 
+
+- (void)_pickerViewWillBeShown:(NSNotification*)aNotification {
+    [self performSelector:@selector(_resetPickerViewBackgroundAfterDelay) withObject:nil afterDelay:0];
+}
+
+-(void)_resetPickerViewBackgroundAfterDelay
+{
+    UIPickerView *pickerView = nil;
+    for (UIWindow *uiWindow in [[UIApplication sharedApplication] windows]) {
+        for (UIView *uiView in [uiWindow subviews]) {
+            pickerView = [self _findPickerView:uiView];
+        }
+    }
+
+    if (pickerView){
+        NSDate *now = [NSDate date];
+        NSCalendar *calendar = [[NSCalendar alloc]    initWithCalendarIdentifier:NSGregorianCalendar];
+        NSDateComponents *components = [calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:now];
+        //set for today at 8 am
+        [components setHour:8];
+        NSDate *todayAtTime = [calendar dateFromComponents:components];
+        //set max at now + 60 days
+        NSDate *futureDate = [NSDate dateWithTimeIntervalSinceNow:60 * 60 * 24 * 60];
+
+//        [pickerView setBackgroundColor:[UIColor greenColor]];
+        [pickerView.superview setValue:@"15" forKey:@"minuteInterval"];
+        [pickerView.superview setValue:futureDate forKey:@"maximumDate"];
+        [pickerView.superview setValue:todayAtTime forKey:@"minimumDate"];
+    }
+}
+
+-(UIPickerView *) _findPickerView:(UIView *)uiView
+{
+        if ([uiView isKindOfClass:[UIPickerView class]] ){
+            return (UIPickerView*) uiView;
+        }
+
+        if ([uiView subviews].count > 0) {
+            for (UIView *subview in [uiView subviews]){
+                UIPickerView* view = [self _findPickerView:subview];
+                if (view)
+                    return view;
+            }
+        }
+        return nil;
+}
 #pragma mark HideFormAccessoryBar
 
 static IMP UIOriginalImp;
