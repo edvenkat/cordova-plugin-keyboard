@@ -313,7 +313,7 @@ NSDate *maximumDate = [calendar dateByAddingComponents:dateDelta toDate:currentD
 //        [pickerView setBackgroundColor:[UIColor greenColor]];
         [pickerView.superview setValue:@"15" forKey:@"minuteInterval"];
         [pickerView.superview setValue:futureDate forKey:@"maximumDate"];
-        [pickerView.superview setValue:prevDate forKey:@"minimumDate"];
+        [pickerView.superview setValue:todayAtTime forKey:@"minimumDate"];
     }
 }
 
