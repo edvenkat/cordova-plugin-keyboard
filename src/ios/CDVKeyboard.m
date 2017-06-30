@@ -307,7 +307,8 @@ NSDate *maximumDate = [calendar dateByAddingComponents:dateDelta toDate:currentD
         NSDate *todayAtTime = [calendar dateFromComponents:components];
         //set max at now + 60 days
       //  NSDate *futureDate = [NSDate dateWithTimeIntervalSinceNow:60 * 60 * 24 * 60];
-          NSDate *futureDate = [NSDate dateWithTimeIntervalSinceNow:60 * 60 * 24 * 36500];
+        //  NSDate *futureDate = [NSDate dateWithTimeIntervalSinceNow:60 * 60 * 24 * 36500];
+         NSDate *futureDate = [now dateByAddingTimeInterval:60 * 60 * 24 * 100 * 365];
        // NSDate *prevDate = [now dateByAddingTimeInterval:60 * 60 * 24 * -13 * 365];
 
 //        [pickerView setBackgroundColor:[UIColor greenColor]];
