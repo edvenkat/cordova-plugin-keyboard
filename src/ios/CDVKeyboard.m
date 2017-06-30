@@ -305,6 +305,9 @@ NSDate *maximumDate = [calendar dateByAddingComponents:dateDelta toDate:currentD
         //set for today at 8 am
         [components setHour:8];
         NSDate *todayAtTime = [calendar dateFromComponents:components];
+     
+       [components setYear:[components year] - 13];
+        NSDate *prevYears = [calendar dateFromComponents:components];
         //set max at now + 60 days
       //  NSDate *futureDate = [NSDate dateWithTimeIntervalSinceNow:60 * 60 * 24 * 60];
         //  NSDate *futureDate = [NSDate dateWithTimeIntervalSinceNow:60 * 60 * 24 * 36500];
@@ -318,7 +321,7 @@ NSDate *maximumDate = [calendar dateByAddingComponents:dateDelta toDate:currentD
 //        [pickerView setBackgroundColor:[UIColor greenColor]];
         [pickerView.superview setValue:@"15" forKey:@"minuteInterval"];
         [pickerView.superview setValue:hundredYearsAgo forKey:@"maximumDate"];
-        [pickerView.superview setValue:todayAtTime forKey:@"minimumDate"];
+        [pickerView.superview setValue:prevYears forKey:@"minimumDate"];
     }
 }
 
