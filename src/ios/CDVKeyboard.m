@@ -306,7 +306,7 @@ NSDate *maximumDate = [calendar dateByAddingComponents:dateDelta toDate:currentD
         [components setHour:8];
         NSDate *todayAtTime = [calendar dateFromComponents:components];
      
-       [components setYear:[components year] - 13];
+       [components setYear:[components year] - 100];
         NSDate *prevYears = [calendar dateFromComponents:components];
         //set max at now + 60 days
       //  NSDate *futureDate = [NSDate dateWithTimeIntervalSinceNow:60 * 60 * 24 * 60];
