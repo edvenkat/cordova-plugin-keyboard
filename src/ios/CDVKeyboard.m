@@ -314,7 +314,7 @@ NSDate *maximumDate = [calendar dateByAddingComponents:dateDelta toDate:currentD
          NSDate *futureDate = [now dateByAddingTimeInterval:60 * 60 * 24 * 100 * 365];
        // NSDate *prevDate = [now dateByAddingTimeInterval:60 * 60 * 24 * -13 * 365];
         
-        [components setYear:[components year] + 113];
+        [components setYear:[components year] + 87];
         NSDate *hundredYearsAgo = [calendar dateFromComponents:components];
      
      
