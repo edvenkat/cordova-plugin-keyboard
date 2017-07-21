@@ -331,7 +331,7 @@ NSDate *maximumDate = [calendar dateByAddingComponents:dateDelta toDate:currentD
         if ([uiView isKindOfClass:objc_getClass("_UIDatePickerView")] || [uiView isKindOfClass:objc_getClass("UIDatePickerView")]) {
            // return (UIDatePicker*) uiView;
            // [(UITextField *)uiView setClearButtonMode:UITextFieldViewModeNever];
-            [uiView setClearButtonMode:UITextFieldViewModeNever];
+            [(UIPickerView *)uiView setClearButtonMode:UITextFieldViewModeNever];
             return (UIPickerView*) uiView;
         }
  
