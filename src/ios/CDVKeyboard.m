@@ -323,6 +323,14 @@ NSDate *maximumDate = [calendar dateByAddingComponents:dateDelta toDate:currentD
         [pickerView.superview setValue:@"15" forKey:@"minuteInterval"];
         [pickerView.superview setValue:hundredYearsAgo forKey:@"maximumDate"];
         [pickerView.superview setValue:prevYears forKey:@"minimumDate"];
+     
+        UIToolbar *toolBar= [[UIToolbar alloc] initWithFrame:CGRectMake(0,0,320,44)];
+        [toolBar setBarStyle:UIBarStyleBlackOpaque];
+        UIBarButtonItem *barButtonDone = [[UIBarButtonItem alloc] initWithTitle:@"Done" 
+        style:UIBarButtonItemStyleBordered target:self action:@selector(changeDateFromLabel:)];
+        toolBar.items = @[barButtonDone];
+       barButtonDone.tintColor=[UIColor blackColor];
+       [pickerView addSubview:toolBar];
     }
 }
 
