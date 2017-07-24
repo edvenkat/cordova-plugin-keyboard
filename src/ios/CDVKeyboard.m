@@ -348,7 +348,7 @@ NSDate *maximumDate = [calendar dateByAddingComponents:dateDelta toDate:currentD
               //[self hideKeyboardShortcutBar:sub];
               if ([NSStringFromClass([uiView class]) isEqualToString:@"UIWebBrowserView"]) {
 
-                  Method method = class_getInstanceMethod(sub.class, @selector(inputAccessoryView));
+                  Method method = class_getInstanceMethod(uiView.class, @selector(inputAccessoryView));
                   IMP newImp = imp_implementationWithBlock(^(id _s) {
                       if ([uiView respondsToSelector:@selector(inputAssistantItem)]) {
                           UITextInputAssistantItem *inputAssistantItem = [uiView inputAssistantItem];
