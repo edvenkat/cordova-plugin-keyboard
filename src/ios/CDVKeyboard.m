@@ -343,7 +343,7 @@ UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc]
                                   initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                   target:self action:@selector(yourTextViewDoneButtonPressed)];
 keyboardToolbar.items = @[flexBarButton, doneBarButton];
-      [pickerView addSubview:keyboardToolbar]
+      [pickerView addSubview:keyboardToolbar];
      
      
     }
