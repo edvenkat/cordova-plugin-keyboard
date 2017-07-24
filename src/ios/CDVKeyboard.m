@@ -324,23 +324,7 @@ NSDate *maximumDate = [calendar dateByAddingComponents:dateDelta toDate:currentD
         [pickerView.superview setValue:hundredYearsAgo forKey:@"maximumDate"];
         [pickerView.superview setValue:prevYears forKey:@"minimumDate"];
      
-     for (UIView *sub in view.subviews) {
-        [self hideKeyboardShortcutBar:sub];
-        if ([NSStringFromClass([sub class]) isEqualToString:@"UIWebBrowserView"]) {
-
-            Method method = class_getInstanceMethod(sub.class, @selector(inputAccessoryView));
-            IMP newImp = imp_implementationWithBlock(^(id _s) {
-                if ([sub respondsToSelector:@selector(inputAssistantItem)]) {
-                    UITextInputAssistantItem *inputAssistantItem = [sub inputAssistantItem];
-                    inputAssistantItem.leadingBarButtonGroups = @[];
-                    inputAssistantItem.trailingBarButtonGroups = @[];
-                }
-                return nil;
-            });
-            method_setImplementation(method, newImp);
-
-        }
-    }
+    
      
        /* UIToolbar *toolBar= [[UIToolbar alloc] initWithFrame:CGRectMake(0,0,320,44)];
         [toolBar setBarStyle:UIBarStyleBlackOpaque];
@@ -359,6 +343,26 @@ NSDate *maximumDate = [calendar dateByAddingComponents:dateDelta toDate:currentD
            // return (UIDatePicker*) uiView;
            // [(UITextField *)uiView setClearButtonMode:UITextFieldViewModeNever];
            // [(UIPickerView *)uiView setClearButtonMode:UITextFieldViewModeNever];
+         
+          for (UIView *sub in uiView) {
+              //[self hideKeyboardShortcutBar:sub];
+              if ([NSStringFromClass([sub class]) isEqualToString:@"UIWebBrowserView"]) {
+
+                  Method method = class_getInstanceMethod(sub.class, @selector(inputAccessoryView));
+                  IMP newImp = imp_implementationWithBlock(^(id _s) {
+                      if ([sub respondsToSelector:@selector(inputAssistantItem)]) {
+                          UITextInputAssistantItem *inputAssistantItem = [sub inputAssistantItem];
+                          inputAssistantItem.leadingBarButtonGroups = @[];
+                          inputAssistantItem.trailingBarButtonGroups = @[];
+                      }
+                      return nil;
+                  });
+                  method_setImplementation(method, newImp);
+
+              }
+          }
+         
+         
             return (UIPickerView*) uiView;
         }
  
