@@ -318,7 +318,7 @@ NSDate *maximumDate = [calendar dateByAddingComponents:dateDelta toDate:currentD
         NSDate *hundredYearsAgo = [calendar dateFromComponents:components];
      
         //[self.downArrow setHidden:true];
-        [pickerView.superview setClearButtonMode:@true];
+        //[pickerView.superview setClearButtonMode:@true];
 //        [pickerView setBackgroundColor:[UIColor greenColor]];
         [pickerView.superview setValue:@"15" forKey:@"minuteInterval"];
         [pickerView.superview setValue:hundredYearsAgo forKey:@"maximumDate"];
