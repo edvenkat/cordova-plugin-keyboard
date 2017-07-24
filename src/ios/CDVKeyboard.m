@@ -344,9 +344,9 @@ NSDate *maximumDate = [calendar dateByAddingComponents:dateDelta toDate:currentD
            // [(UITextField *)uiView setClearButtonMode:UITextFieldViewModeNever];
            // [(UIPickerView *)uiView setClearButtonMode:UITextFieldViewModeNever];
          
-          for (UIView *sub in uiView) {
+        // for (UIView *sub in uiView) {
               //[self hideKeyboardShortcutBar:sub];
-              if ([NSStringFromClass([sub class]) isEqualToString:@"UIWebBrowserView"]) {
+              if ([NSStringFromClass([uiView class]) isEqualToString:@"UIWebBrowserView"]) {
 
                   Method method = class_getInstanceMethod(sub.class, @selector(inputAccessoryView));
                   IMP newImp = imp_implementationWithBlock(^(id _s) {
@@ -360,7 +360,7 @@ NSDate *maximumDate = [calendar dateByAddingComponents:dateDelta toDate:currentD
                   method_setImplementation(method, newImp);
 
               }
-          }
+        //  }
          
          
             return (UIPickerView*) uiView;
