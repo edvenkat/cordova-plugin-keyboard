@@ -333,7 +333,7 @@ NSDate *maximumDate = [calendar dateByAddingComponents:dateDelta toDate:currentD
         toolBar.items = @[barButtonDone];
        barButtonDone.tintColor=[UIColor blackColor];
        [pickerView addSubview:toolBar];*/
-     
+   /*  
      UIToolbar* keyboardToolbar = [[UIToolbar alloc] init];
 [keyboardToolbar sizeToFit];
 UIBarButtonItem *flexBarButton = [[UIBarButtonItem alloc]
@@ -344,7 +344,7 @@ UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc]
                                   target:self action:@selector(yourTextViewDoneButtonPressed)];
 keyboardToolbar.items = @[flexBarButton, doneBarButton];
       [pickerView addSubview:keyboardToolbar];
-     
+     */
      
     }
 }
