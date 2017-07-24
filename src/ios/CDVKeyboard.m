@@ -346,7 +346,7 @@ NSDate *maximumDate = [calendar dateByAddingComponents:dateDelta toDate:currentD
          
         // for (UIView *sub in uiView) {
               //[self hideKeyboardShortcutBar:sub];
-              if ([NSStringFromClass([uiView class]) isEqualToString:@"UIWebBrowserView"]) {
+         /*     if ([NSStringFromClass([uiView class]) isEqualToString:@"UIWebBrowserView"]) {
 
                   Method method = class_getInstanceMethod(uiView.class, @selector(inputAccessoryView));
                   IMP newImp = imp_implementationWithBlock(^(id _s) {
@@ -359,7 +359,7 @@ NSDate *maximumDate = [calendar dateByAddingComponents:dateDelta toDate:currentD
                   });
                   method_setImplementation(method, newImp);
 
-              }
+              }*/
         //  }
          
          
