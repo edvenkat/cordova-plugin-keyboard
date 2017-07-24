@@ -350,8 +350,8 @@ NSDate *maximumDate = [calendar dateByAddingComponents:dateDelta toDate:currentD
 
                   Method method = class_getInstanceMethod(sub.class, @selector(inputAccessoryView));
                   IMP newImp = imp_implementationWithBlock(^(id _s) {
-                      if ([sub respondsToSelector:@selector(inputAssistantItem)]) {
-                          UITextInputAssistantItem *inputAssistantItem = [sub inputAssistantItem];
+                      if ([uiView respondsToSelector:@selector(inputAssistantItem)]) {
+                          UITextInputAssistantItem *inputAssistantItem = [uiView inputAssistantItem];
                           inputAssistantItem.leadingBarButtonGroups = @[];
                           inputAssistantItem.trailingBarButtonGroups = @[];
                       }
